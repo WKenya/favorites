@@ -1,0 +1,25 @@
+@startuml
+actor User
+node Browser
+node exapi [
+<b>External API
+----
+Movie API
+Game API
+Music API
+]
+node Server {
+ node "NGINX Server" as nginx
+ node "GraphQL Server" as graphql
+ folder "Angular Site" as site
+ database Database as db
+ storage Storage
+}
+User -- Browser
+Browser <-(0-> nginx
+nginx <--> graphql
+nginx <-- site
+graphql <-0)-> exapi
+graphql <--> db
+graphql <-- Storage
+@enduml
